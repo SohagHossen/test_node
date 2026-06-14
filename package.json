@@ -1,0 +1,12 @@
+{
+  "name": "test-node-vercel",
+  "version": "1.0.0",
+  "description": "Testing Vercel deployment with Node.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "node api/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
