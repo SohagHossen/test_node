@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Under Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -21,6 +23,19 @@
     h1 { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(90deg, #e94560, #f5a623); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     p { font-size: 1.2rem; color: #a0aec0; margin-bottom: 2rem; }
     .bar { width: 80px; height: 4px; background: linear-gradient(90deg, #e94560, #f5a623); margin: 0 auto 2rem; border-radius: 2px; }
+    .clock {
+      font-family: 'Orbitron', monospace;
+      font-size: 2.5rem;
+      color: #e94560;
+      margin-bottom: 2rem;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px rgba(233,69,96,0.5);
+    }
+    .date {
+      font-size: 1rem;
+      color: #a0aec0;
+      margin-bottom: 1.5rem;
+    }
     .tag { background: rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; display: inline-block; }
   </style>
 </head>
@@ -30,7 +45,18 @@
     <h1>Under Construction</h1>
     <div class="bar"></div>
     <p>We're working hard to bring you something amazing.<br>Stay tuned!</p>
+    <div class="date" id="date"></div>
+    <div class="clock" id="clock">00:00:00</div>
     <div class="tag">Coming Soon</div>
   </div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
 </body>
 </html>
