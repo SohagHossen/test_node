@@ -1,10 +1,9 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello from Vercel!', timestamp: new Date().toISOString() });
-});
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api', (req, res) => {
   res.json({ message: 'API is running', version: '1.0.0' });
