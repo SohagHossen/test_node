@@ -3,60 +3,471 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Under Construction</title>
+  <title>Sohag Hossen | Server Administrator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    :root {
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --card: #1a1a3e;
+      --accent: #e94560;
+      --accent2: #f5a623;
+      --text: #e0e0e0;
+      --muted: #8890a0;
+      --gradient: linear-gradient(135deg, #e94560, #f5a623);
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
-    .container { padding: 2rem; }
-    .icon { font-size: 5rem; margin-bottom: 1rem; }
-    h1 { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(90deg, #e94560, #f5a623); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    p { font-size: 1.2rem; color: #a0aec0; margin-bottom: 2rem; }
-    .bar { width: 80px; height: 4px; background: linear-gradient(90deg, #e94560, #f5a623); margin: 0 auto 2rem; border-radius: 2px; }
-    .clock {
-      font-family: 'Orbitron', monospace;
-      font-size: 2.5rem;
-      color: #e94560;
-      margin-bottom: 2rem;
-      letter-spacing: 4px;
-      text-shadow: 0 0 10px rgba(233,69,96,0.5);
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,10,26,0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .date {
-      font-size: 1rem;
-      color: #a0aec0;
-      margin-bottom: 1.5rem;
+    nav .container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+    .logo { font-size: 1.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    nav ul { display: flex; gap: 25px; list-style: none; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+    nav a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, #0a0a1a 0%, #12122a 50%, #1a1a3e 100%);
+      position: relative; overflow: hidden;
     }
-    .tag { background: rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; display: inline-block; }
+    .hero::before {
+      content: ''; position: absolute; top: -50%; right: -20%;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,69,96,0.08) 0%, transparent 70%);
+    }
+    .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero .subtitle { font-size: 1.1rem; color: var(--muted); margin-bottom: 20px; }
+    .hero .contact-links { display: flex; flex-direction: column; gap: 8px; margin-bottom: 25px; }
+    .hero .contact-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+    .hero .contact-links a:hover { color: var(--accent); }
+    .hero .contact-links i { width: 22px; color: var(--accent); }
+    .btn {
+      display: inline-block; padding: 12px 30px; border-radius: 50px;
+      background: var(--gradient); color: #fff; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem; transition: opacity 0.3s; border: none; cursor: pointer;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-outline { background: transparent; border: 2px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent); }
+    .hero-right { display: flex; justify-content: center; }
+    .hero-avatar {
+      width: 320px; height: 320px; border-radius: 50%;
+      background: var(--gradient); display: flex; align-items: center; justify-content: center;
+      font-size: 6rem; color: #fff; box-shadow: 0 20px 80px rgba(233,69,96,0.3);
+    }
+
+    /* Sections */
+    section { padding: 100px 0; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+    .section-subtitle { color: var(--muted); margin-bottom: 50px; }
+    .section-bar { width: 60px; height: 4px; background: var(--gradient); border-radius: 2px; margin: 0 0 50px; }
+
+    /* About */
+    #about { background: var(--bg2); }
+    .about-text { max-width: 800px; font-size: 1.05rem; color: var(--muted); line-height: 1.8; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .skill-card {
+      background: var(--card); padding: 25px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, border-color 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .skill-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+    .skill-card .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-card .tags span {
+      background: rgba(233,69,96,0.1); color: var(--text); padding: 4px 12px;
+      border-radius: 50px; font-size: 0.82rem; border: 1px solid rgba(233,69,96,0.15);
+    }
+
+    /* Experience */
+    #experience { background: var(--bg2); }
+    .timeline { display: flex; flex-direction: column; gap: 30px; }
+    .timeline-item {
+      background: var(--card); padding: 30px; border-radius: 12px;
+      border-left: 3px solid var(--accent); border: 1px solid rgba(255,255,255,0.05);
+      border-left-width: 3px;
+    }
+    .timeline-item h3 { font-size: 1.2rem; font-weight: 600; }
+    .timeline-item .company { color: var(--accent2); font-weight: 500; }
+    .timeline-item .period { color: var(--muted); font-size: 0.85rem; margin: 5px 0 15px; }
+    .timeline-item ul { list-style: none; }
+    .timeline-item ul li { color: var(--muted); font-size: 0.95rem; padding: 4px 0; padding-left: 20px; position: relative; }
+    .timeline-item ul li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+
+    /* Contact */
+    .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .contact-info h3 { font-size: 1.3rem; margin-bottom: 20px; }
+    .contact-info p { color: var(--muted); margin-bottom: 10px; }
+    .contact-info i { width: 22px; color: var(--accent); margin-right: 10px; }
+    .contact-form { display: flex; flex-direction: column; gap: 15px; }
+    .contact-form input, .contact-form textarea {
+      padding: 14px 18px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+      background: var(--card); color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      transition: border-color 0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-form .btn { align-self: flex-start; }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.05);
+      color: var(--muted); font-size: 0.85rem;
+    }
+    .social-links { margin-bottom: 15px; }
+    .social-links a {
+      color: var(--muted); font-size: 1.3rem; margin: 0 10px; transition: color 0.3s;
+    }
+    .social-links a:hover { color: var(--accent); }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px; padding: 15px 25px;
+      border-radius: 8px; color: #fff; font-weight: 500; font-size: 0.9rem;
+      transform: translateY(100px); opacity: 0; transition: all 0.4s; z-index: 200;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { background: #22c55e; }
+    .toast.error { background: #ef4444; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero .contact-links { align-items: center; }
+      .hero-avatar { width: 220px; height: 220px; font-size: 4rem; }
+      nav ul { gap: 12px; }
+      nav a { font-size: 0.8rem; }
+      .contact-content { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .section-bar { margin: 0 auto 50px; }
+      .section-title { text-align: center; }
+      .section-subtitle { text-align: center; }
+    }
   </style>
 </head>
 <body>
+
+<nav>
   <div class="container">
-    <div class="icon">🚧</div>
-    <h1>Under Construction</h1>
-    <div class="bar"></div>
-    <p>We're working hard to bring you something amazing.<br>Stay tuned!</p>
-    <div class="date" id="date"></div>
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="tag">Coming Soon</div>
+    <div class="logo">Sohag Hossen</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </div>
-  <script>
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
-      document.getElementById('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container">
+    <div>
+      <h1>Hi, I'm <span>Sohag Hossen</span></h1>
+      <p class="subtitle">Server Administrator &bull; DevOps Engineer &bull; System Administrator</p>
+      <div class="contact-links">
+        <a href="mailto:sohaghossen.cse@gmail.com"><i class="fas fa-envelope"></i> sohaghossen.cse@gmail.com</a>
+        <a href="tel:+8801601922328"><i class="fas fa-phone"></i> +880 1601 922328</a>
+        <a href="https://www.sohag.info.bd" target="_blank"><i class="fas fa-globe"></i> www.sohag.info.bd</a>
+        <a href="https://www.linkedin.com/in/sohag-hossen041098/" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/sohag-hossen041098</a>
+        <a><i class="fas fa-map-marker-alt"></i> 527/22 Ambagan More, Noyatola, Moghbazar, Dhaka 1217</a>
+      </div>
+      <a href="#contact" class="btn">Contact Me</a>
+      <a href="#experience" class="btn btn-outline" style="margin-left:10px">Experience</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-avatar">
+        <i class="fas fa-user-circle"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Me</h2>
+    <div class="section-bar"></div>
+    <p class="about-text">
+      Hi, I am a Server Administrator with over two years of experience managing, maintaining,
+      and optimizing server infrastructure. I am proficient in various operating systems,
+      virtualization technologies, and networking protocols. I am seeking to contribute
+      expertise in ensuring the reliability, security, and performance of IT infrastructure
+      in a dynamic organization.
+    </p>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title">Professional Skills</h2>
+    <p class="section-subtitle">Technologies &amp; tools I work with</p>
+    <div class="section-bar"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Operating Systems</h3>
+        <div class="tags">
+          <span>Almalinux</span><span>Cloudlinux</span><span>CentOS 7</span>
+          <span>Kali Linux</span><span>Ubuntu</span><span>Windows Server (2000-2022)</span>
+          <span>Windows XP/7/8/10/11</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Web Servers</h3>
+        <div class="tags">
+          <span>Apache</span><span>LiteSpeed</span><span>Nginx (Forward & Reverse Proxy, Load Balancing)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud Platforms</h3>
+        <div class="tags">
+          <span>AWS</span><span>Azure</span><span>Google Cloud</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>DevOps Tools</h3>
+        <div class="tags">
+          <span>Docker</span><span>Kubernetes</span><span>Helm</span><span>Ansible</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>CI/CD Pipeline</h3>
+        <div class="tags">
+          <span>Jenkins</span><span>Circle CI</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Monitoring Tools</h3>
+        <div class="tags">
+          <span>Grafana</span><span>Prometheus</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Programming Languages</h3>
+        <div class="tags">
+          <span>C & C++</span><span>Bash Script</span><span>Golang</span><span>Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Web Experience</h3>
+        <div class="tags">
+          <span>HTML5</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span>
+          <span>Responsive Web Design</span><span>Django</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Database</h3>
+        <div class="tags">
+          <span>MySQL</span><span>Sqlite3</span><span>Oracle</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Version Control</h3>
+        <div class="tags">
+          <span>Git</span><span>GitHub</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Virtualization</h3>
+        <div class="tags">
+          <span>KVM</span><span>VMware</span><span>vSphere</span>
+          <span>Microsoft Hyper-V</span><span>VirtualBox</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Control Panels</h3>
+        <div class="tags">
+          <span>WHM/cPanel</span><span>Plesk</span><span>Webuzo</span>
+          <span>DirectAdmin</span><span>CyberPanel</span><span>CWP</span><span>aaPanel</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Networking</h3>
+        <div class="tags">
+          <span>Mikrotik Router</span><span>TCP/IP</span><span>DNS</span><span>DHCP</span>
+          <span>VPN</span><span>VLAN</span><span>FTP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Security</h3>
+        <div class="tags">
+          <span>WAF</span><span>IDS/IPS</span><span>DDoS Mitigation</span>
+          <span>Cloudflare</span><span>Imunify360</span><span>ClamAV</span>
+          <span>ModSecurity</span><span>SSL/TLS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Hardware & Server</h3>
+        <div class="tags">
+          <span>Server Mount</span><span>RAID (SW/HW)</span><span>iDRAC</span>
+          <span>Firmware</span><span>BIOS</span><span>Server Health Check</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Arduino & IoT</h3>
+        <div class="tags">
+          <span>Arduino</span><span>ESP32</span><span>Sensors</span><span>Modulus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Professional Experience</h2>
+    <p class="section-subtitle">My career journey</p>
+    <div class="section-bar"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Junior Server Admin</h3>
+        <div class="company">Code For Host Inc Ltd.</div>
+        <div class="period">Jan 2023 - Present</div>
+        <ul>
+          <li>Server management and administration</li>
+          <li>Hostever Support</li>
+          <li>MIMSMS Support</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>System Administrator</h3>
+        <div class="company">Bonik Gadgets</div>
+        <div class="period">Aug 2022 - Sept 2022</div>
+        <ul>
+          <li>Server Mount, Hardware installation, Configuration of Dedicated Server</li>
+          <li>VPS, Windows Server, RDP, Disk and RAM replacement</li>
+          <li>Software and Hardware Raid, Virtual Disk Creation</li>
+          <li>Server Health Checkup, BIOS, Firmware, iDRAC</li>
+          <li>Troubleshooting Server Issues</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <h3>System Administrator</h3>
+        <div class="company">Decode Lab</div>
+        <div class="period">Jan 2018 - Apr 2018</div>
+        <ul>
+          <li>Router Configuration</li>
+          <li>Switch Configuration</li>
+          <li>CCNA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Have a question or want to work together?</p>
+    <div class="section-bar"></div>
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p><i class="fas fa-envelope"></i> sohaghossen.cse@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +880 1601 922328</p>
+        <p><i class="fas fa-globe"></i> www.sohag.info.bd</p>
+        <p><i class="fab fa-linkedin"></i> linkedin.com/in/sohag-hossen041098</p>
+        <p><i class="fas fa-map-marker-alt"></i> 527/22 Ambagan More, Noyatola, Moghbazar, Dhaka 1217</p>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/sohag-hossen041098/" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/SohagHossen" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.sohag.info.bd" target="_blank"><i class="fas fa-globe"></i></a>
+    </div>
+    <p>&copy; 2026 Sohag Hossen. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAUVkhbyWXaWy3bdDxLgaIedtpi5PUJ1zc",
+    authDomain: "test-project-ab414.firebaseapp.com",
+    projectId: "test-project-ab414",
+    storageBucket: "test-project-ab414.firebasestorage.app",
+    messagingSenderId: "139581827127",
+    appId: "1:139581827127:web:44b43fbe5842ed0d37f7b2",
+    measurementId: "G-BS5ZMSZTK3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const form = document.getElementById('contactForm');
+  const toast = document.getElementById('toast');
+
+  function showToast(message, type) {
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData(form);
+      await addDoc(collection(db, 'messages'), {
+        name: data.get('name'),
+        email: data.get('email'),
+        subject: data.get('subject'),
+        message: data.get('message'),
+        createdAt: serverTimestamp()
+      });
+      showToast('Message sent successfully!', 'success');
+      form.reset();
+    } catch (err) {
+      showToast('Failed to send. Please try again.', 'error');
+      console.error('Firebase error:', err);
+    } finally {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
     }
-    updateClock();
-    setInterval(updateClock, 1000);
-  </script>
+  });
+</script>
+
 </body>
 </html>
